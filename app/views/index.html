@@ -1,0 +1,131 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>CreativeFrameworks <> </title>
+        <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" href="css/style.css">
+        <link rel="stylesheet" type="text/css" href="css/hover.css">
+        <link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+        <script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+	</head>
+<body>
+<!-- login form -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="myModalLabel">Login</h4>
+            </div>
+            <form role='form' action="/login" method="post">
+                <div class="modal-body">
+
+                            <div class="form-group">
+                                <label for="username">Username</label>
+                                <input class="form-control" placeholder="Username" type="text" id="username" name="username" value="" maxlength="20"  pattern=".{4,}" required/>
+                            </div>
+                            <div class="form-group">
+                                <label for="password">Password</label>
+                                <input class="form-control" placeholder="Password" type="password" id="password" name="password" value="" maxlength="20"  pattern=".{4,}" required/>
+                            </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Login</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+	
+
+
+
+	
+<div class="container-fluid">
+    <div class="row pull-right">
+        {% if loggedin is defined %}
+        <a class="btn btn-link" href="/dashboard">dashboard</a>
+        <a class="btn btn-link" href="/logout">logout</a>
+        {% else %}
+        <!-- Button trigger login -->
+        <button class="btn btn-link" data-toggle="modal" data-target="#myModal">
+            login
+        </button>
+        {% endif %}
+    </div>
+
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3">
+            <img src="img/cf-logo-01-01.jpg" class="img-responsive">
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12 text-center">
+            <!--<p></p>-->
+            <h3 class="title-dash">Start exploring server-side languages and frameworks!</h3>
+
+        </div>
+    </div>
+
+
+    <div id="languages" class="row grid ">
+        <h1 class="title">Languages</h1>
+        {% for language in languages %}
+        <figure class="effect-dexter pull-left">
+            <!--<img src="img/code.jpg" width="400" height="300" alt="img01"/>-->
+            <figcaption>
+                    <h2>{{language.langName}}</h2>
+                    <p>View</p>
+                    <a href="/languages/{{language.langId}}">View</a>
+            </figcaption>
+        </figure>
+        {% endfor %}
+    </div>
+
+	<div id="frameworks" class="row grid">
+        <h1 class="title">Frameworks</h1>
+		{% for framework in frameworks %}
+        <figure class="effect-layla pull-left">
+            <!--<img src="img/code.jpg" width="400" height="300" alt="img01"/>-->
+            <figcaption>
+                    <h2>{{framework.langName}}</h2>
+                    <h3>{{framework.frameName}}</h3>
+                    <a href="/frameworks/{{framework.frameId}}">View</a>
+            </figcaption>
+        </figure>
+		{% endfor %}
+	</div>
+
+	<div id="tutorials" class="row grid ">
+        <h1 class="title">Tutorials</h1>
+		{% for tutorial in tutorials %}
+        <figure class="effect-romeo pull-left">
+            <!--<img src="img/code.jpg" width="400" height="300" alt="img01"/>-->
+            <figcaption>
+                    <h3>{{tutorial.langName}}</h3>
+                    <h4>{{tutorial.frameName}}</h4>
+                    <h6>{{tutorial.tutorialName}}</h6>
+                    <a href="/tutorials/{{tutorial.tutorId}}">View</a>
+             </figcaption>
+        </figure>
+		{% endfor %}
+	</div>
+
+    <div class="row">
+        <div class="col-md-12 text-center">
+            <p class="title-dash">Developed and designed by Anthony Kluba, Gabriel Ferraz, and Arturo Alquicira.</p>
+        </div>
+    </div>
+
+</div>
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+</body>
+</html>
+

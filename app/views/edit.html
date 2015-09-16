@@ -1,0 +1,111 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>CreativeFrameworks <> </title>
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="../css/style.css">
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+</head>
+<body>
+    <div class="container-fluid">
+
+        <div class="row" >
+            <div class="col-md-4 col-md-offset-4" id="tables">
+                {% for edit in editlang %}
+                <form role="form" action="/edit_language/{{edit.langId}}" method="POST">
+                    <div class="form-group">
+                        <h5>Type a language</h5>
+                    <input class="form-control" type="text" name="language" value="{{edit.langName}}">
+                    </div>
+                    <div class="form-group">
+                    <input class="form-control" type="hidden" name="_METHOD" value="put" />
+                    </div>
+                    <input class="btn btn-primary" type="submit" value="Save" />
+                </form>
+                {% endfor %}
+
+                {% for editlink in editlink %}
+                <form role="form" action="/edit_link/{{editlink.langId}}" method="POST">
+                    <div class="form-group">
+                        <h5>Type a language</h5>
+                        <input class="form-control" type="text" name="link" value="{{editlink.langLink}}">
+                    </div>
+                    <div class="form-group">
+                        <input class="form-control" type="hidden" name="_METHOD" value="put" />
+                    </div>
+                    <input class="btn btn-primary" type="submit" value="Save" />
+                </form>
+                {% endfor %}
+
+                {% for edit in editframe %}
+                <form role="form" action="/edit_framework/{{edit.frameId}}" method="POST">
+                    <h5>Select a language</h5>
+                    <select class="form-control"> name="language">
+                        {% for lang in lang %}
+                        <option {% if lang.langId == edit.language %} selected="selected"{% endif %} value="{{lang.langId}}">{{lang.langName}}</option>
+                        {% endfor %}
+                    </select>
+                    <h5>Type a framework</h5>
+                    <div class="form-group">
+                    <input class="form-control" type="text" name="framework" value="{{edit.frameName}}">
+                    </div>
+                    <div class="form-group">
+                    <input class="form-control" type="hidden" name="_METHOD" value="put" />
+                    </div>
+                    <input class="btn btn-primary" type="submit" value="Save" />
+                </form>
+                {% endfor %}
+
+                {% for editframe in editframelink %}
+                <form role="form" action="/edit_frame_link/{{editframe.frameId}}" method="POST">
+                    <div class="form-group">
+                        <h5>Type a language</h5>
+                        <input class="form-control" type="text" name="link" value="{{editframe.frameLink}}">
+                    </div>
+                    <div class="form-group">
+                        <input class="form-control" type="hidden" name="_METHOD" value="put" />
+                    </div>
+                    <input class="btn btn-primary" type="submit" value="Save" />
+                </form>
+                {% endfor %}
+
+
+                {% for edit in edittutor %}
+                <form role='form' action="/edit_tutorial/{{edit.tutorId}}" method="POST">
+                    <h5>Select a language</h5>
+                    <select class="form-control" name="language">
+                        {% for lang in lang %}
+                        <option {% if lang.langId == edit.language %} selected="selected"{% endif %} value="{{lang.langId}}">{{lang.langName}}</option>
+                        {% endfor %}
+                    </select>
+                    <h5>Select a framework</h5>
+                    <select class="form-control" name="framework">
+                        {% for frame in frame %}
+                        <option {% if frame.frameId == edit.framework %} selected="selected"{% endif %} value="{{frame.frameId}}">{{frame.frameName}}</option>
+                        {% endfor %}
+                    </select>
+
+                    <div class="form-group">
+                    <h5>Type a tutorial</h5>
+                    <input class="form-control" type="text" name="tutorial" value="{{edit.tutorialName}}">
+                    </div>
+                    <div class="form-group">
+                    <input class="form-control" type="hidden" name="_METHOD" value="put" />
+                    </div>
+                    <input class="btn btn-primary" type="submit" value="Save" />
+                </form>
+                {% endfor %}
+		
+                <p></p>
+
+		        <a class="text-danger" href="/dashboard">Cancel</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

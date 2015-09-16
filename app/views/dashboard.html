@@ -1,0 +1,157 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>CreativeFrameworks <> </title>
+        <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" href="css/style.css">
+        <link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+        <script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+    </head>
+<body>
+<div class="container-fluid">
+
+    <div class="row pull-right">
+		<a class="btn btn-link" href="/">home</a>
+		<a class="btn btn-link" href="/logout">logout</a>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3" id="header-dash">
+            <h1>My Dashboard</h1>
+        </div>
+    </div>
+
+    <div class="row">
+    <div class="col-md-6 col-md-offset-3" id="tables">
+
+		<div id="language_table" class="row">
+
+            <div class="col-md-12">
+
+                <h2>Languages</h2>
+                <form class="form-inline" role="form" action="/add_language" method="POST">
+                    <div class="form-group">
+                        <input class="form-control" type="text" name="language" placeholder="Language" />
+                    </div>
+                    <input class="btn btn-default pull-right" type="submit" value="Save" />
+                </form>
+                <p></p>
+                <table class="table table-hover">
+                    <tr>
+                        <th>Language</th>
+                        <th>edit <span class="glyphicon glyphicon-pencil"></span></th>
+                        <th>delete <span class="glyphicon glyphicon-trash"></span></th>
+                        <th>code <span class="glyphicon glyphicon-list-alt"></span></th>
+                        <th>link</th>
+                    </tr>
+                    {% for language in languages %}
+                    <tr>
+                        <td>{{language.langName}}</td>
+                        <td><a href="edit_language/{{language.langId}}">edit  <span class="glyphicon glyphicon-pencil"></span></a></td>
+                        <td><a href="delete_language/{{language.langId}}">delete <span class="glyphicon glyphicon-trash"></span></a></td>
+                        <td><a href="lang_note/{{language.langId}}">code <span class="glyphicon glyphicon-list-alt"></span></a></td>
+                        <td><a href="edit_link/{{language.langId}}">link</a></td>
+                    </tr>
+                    {% endfor %}
+
+                </table>
+
+            </div>
+		</div>
+		
+		<div id="framework_table" class="row">
+            <div class="col-md-12">
+                <h2>Frameworks</h2>
+                <form class="form-inline" role="form" action="/add_framework" method="POST">
+                    <select class="form-control" name="language">
+                        {% for language in languages %}
+                        <option value="{{language.langId}}">{{language.langName}}</option>
+                        {% endfor %}
+                    </select>
+                    <div class="form-group">
+                        <input class="form-control" type="text" name="frame_name" placeholder="Framework" />
+                    </div>
+                    <input class="btn btn-default pull-right" type="submit" value="Save" />
+                </form>
+                <p></p>
+                <table class="table table-hover">
+                    <tr>
+                        <th>Language</th>
+                        <th>Framework</th>
+                        <th>edit <span class="glyphicon glyphicon-pencil"></span></th>
+                        <th>delete <span class="glyphicon glyphicon-trash"></span></th>
+                        <th>code <span class="glyphicon glyphicon-list-alt"></span></th>
+                        <th>link</th>
+                    </tr>
+                    {% for framework in frameworks %}
+                    <tr>
+                        <td>{{framework.langName}}</td>
+                        <td>{{framework.frameName}}</td>
+                        <td><a href="edit_framework/{{framework.frameId}}">edit <span class="glyphicon glyphicon-pencil"></span></a></td>
+                        <td><a href="delete_framework/{{framework.frameId}}">delete <span class="glyphicon glyphicon-trash"></span></a></td>
+                        <td><a href="frame_note/{{framework.frameId}}">code <span class="glyphicon glyphicon-list-alt"></span></a></td>
+                        <td><a href="edit_frame_link/{{framework.frameId}}">link</a></td>
+                    </tr>
+                    {% endfor %}
+
+                </table>
+
+            </div>
+		</div>
+		
+		<div id="tutorial_table" class="row">
+            <div class="col-md-12">
+                <h2>Tutorials</h2>
+                <form class="form-inline" role="form" action="/add_tutorial" method="POST">
+                    <select class="form-control" name="language">
+                        {% for language in languages %}
+                        <option value="{{language.langId}}">{{language.langName}}</option>
+                        {% endfor %}
+                    </select>
+                    <select class="form-control" name="frame_name">
+                        {% for framework in frameworks %}
+                        <option value="{{framework.frameId}}">{{framework.frameName}}</option>
+                        {% endfor %}
+                    </select>
+                    <div class="form-group">
+                        <input class="form-control" type="text" name="tutorial_name" placeholder="Tutorial" />
+                    </div>
+                    <input class="btn btn-default pull-right" type="submit" value="Save" />
+                </form>
+                <p></p>
+                <table class="table table-hover">
+                    <tr>
+                        <th>Language</th>
+                        <th>Framework</th>
+                        <th>Tutorial</th>
+                        <th>edit <span class="glyphicon glyphicon-pencil"></span></th>
+                        <th>delete <span class="glyphicon glyphicon-trash"></span></th>
+                        <th>code <span class="glyphicon glyphicon-list-alt"></span></th>
+                    </tr>
+                    {% for tutorial in tutorials %}
+                    <tr>
+                        <td>{{tutorial.langName}}</td>
+                        <td>{{tutorial.frameName}}</td>
+                        <td>{{tutorial.tutorialName}}</td>
+                        <td><a href="edit_tutorial/{{tutorial.tutorId}}">edit <span class="glyphicon glyphicon-pencil"></span></a></td>
+                        <td><a href="delete_tutorial/{{tutorial.tutorId}}">delete <span class="glyphicon glyphicon-trash"></span></a></td>
+                        <td><a href="tutor_note/{{tutorial.tutorId}}">code <span class="glyphicon glyphicon-list-alt"></span></a></td>
+                    </tr>
+                    {% endfor %}
+
+                </table>
+
+            </div>
+		</div>
+    </div>
+    </div>
+		
+
+</div>
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+</body>
+</html>
